@@ -6,15 +6,9 @@ import tb from "./tb.png";
 //   <p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>
 // `;
 
-
 document.body.innerHTML = `
   <p>Get me more Taco Bell</p>
   <button id="TacoBellButton" style="background:none, pointer:none, cursor:none;">
   <img src="${tb}" class="icon" alt="Taco Bell Icon" />
   </button>
 `;
-
-
-
-
-
