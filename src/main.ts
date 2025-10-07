@@ -16,12 +16,17 @@ document.body.innerHTML = `
   </button>
 `;
 
-const counterElement = document.getElementById("counter");
+const counterElement = document.getElementById("counter")!;
 
 document.getElementById("TacoBellButton")?.addEventListener("click", () => {
   counter++;
   console.log("Amount of Taco Bell: ", counter);
   if (counterElement) {
-    counterElement.textContent = counter.toString();
+    counterElement.textContent = `${counter} taco${counter !== 1 ? "s" : ""}`;
   }
 });
+
+setInterval(() => {
+  counter++;
+  counterElement.textContent = `${counter} taco${counter !== 1 ? "s" : ""}`;
+}, 1000);
