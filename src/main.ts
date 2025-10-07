@@ -10,7 +10,7 @@ let counter = 0;
 
 document.body.innerHTML = `
   <p>Get me more Taco Bell</p>
-  <p id="counter">${counter} tacos</p>
+  <p id="counter">${counter} taco</p>
   <button id="TacoBellButton" style="background:none, pointer:none, cursor:none;">
   <img src="${tb}" class="icon" alt="Taco Bell Icon" />
   </button>
@@ -26,7 +26,17 @@ document.getElementById("TacoBellButton")?.addEventListener("click", () => {
   }
 });
 
-setInterval(() => {
-  counter++;
-  counterElement.textContent = `${counter} taco${counter !== 1 ? "s" : ""}`;
-}, 1000);
+let prev = performance.now();
+
+function animate(time: number) {
+  const timeSpent = (time - prev) / 1000; // to find how much time has passed
+  prev = time;
+
+  counter += timeSpent;
+  const rounded = Math.floor(counter); //no decimals
+  counterElement.textContent = `${rounded} taco${rounded !== 1 ? "s" : ""}`; // 1 taco !== 1 tacos
+
+  requestAnimationFrame(animate);
+}
+
+requestAnimationFrame(animate); //start
