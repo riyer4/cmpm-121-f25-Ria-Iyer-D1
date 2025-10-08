@@ -41,7 +41,8 @@ document.getElementById("BajaButton")?.addEventListener("click", () => {
     upgradeCounter++;
     console.log("Baja Upgrade acquired!");
     if (upgradeCounterElement) {
-      upgradeCounterElement.textContent = `Baja Blast Upgrades: ${upgradeCounter}`;
+      upgradeCounterElement.textContent =
+        `Baja Blast Upgrades: ${upgradeCounter}`;
     }
     if (!running) {
       running = true;
@@ -53,7 +54,6 @@ document.getElementById("BajaButton")?.addEventListener("click", () => {
   }
 });
 
-
 function animate(time: number) {
   const timePassed = (time - prev) / 1000; // to find how much time has passed
   prev = time;
@@ -64,4 +64,3 @@ function animate(time: number) {
 
   requestAnimationFrame(animate);
 }
-
