@@ -9,6 +9,7 @@ import baja from "./bbt.jpg";
 
 let counter = 0;
 let upgradeCounter = 0;
+let growthRate = 0;
 let running = false; //to track upgrades
 let prev = performance.now();
 
@@ -22,10 +23,12 @@ document.body.innerHTML = `
   <button id="BajaButton" style="background:none, pointer:none, cursor:none;">
   <img src="${baja}" class="icon" alt="Baja Blast Icon" />
   </button>
+  <p id="growth">Taco Multiplier: ${growthRate}</p>
 `;
 
 const counterElement = document.getElementById("counter")!;
 const upgradeCounterElement = document.getElementById("upgrades")!;
+const growthRateElement = document.getElementById("growth")!;
 
 document.getElementById("TacoBellButton")?.addEventListener("click", () => {
   counter++;
@@ -59,8 +62,11 @@ function animate(time: number) {
   prev = time;
 
   counter += timePassed * upgradeCounter;
+  growthRate = 1 + (0.1 * upgradeCounter);
   const rounded = Math.floor(counter); //no decimals
   counterElement.textContent = `${rounded} taco${rounded !== 1 ? "s" : ""}`; // 1 taco !== 1 tacos
-
+  if (growthRateElement) {
+    growthRateElement.textContent = `Taco Multiplier: ${growthRate}x`;
+  }
   requestAnimationFrame(animate);
 }
