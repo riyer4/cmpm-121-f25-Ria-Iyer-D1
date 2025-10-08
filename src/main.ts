@@ -8,10 +8,14 @@ import baja from "./bbt.jpg";
 // `;
 
 let counter = 0;
+let upgradeCounter = 0;
+let running = false; //to track upgrades
+let prev = performance.now();
 
 document.body.innerHTML = `
   <p>Get me more Taco Bell</p>
   <p id="counter">${counter} taco</p>
+  <p id="upgrades">Baja Blast Upgrades: ${upgradeCounter}</p>
   <button id="TacoBellButton" style="background:none, pointer:none, cursor:none;">
   <img src="${tb}" class="icon" alt="Taco Bell Icon" />
   </button>
@@ -21,6 +25,7 @@ document.body.innerHTML = `
 `;
 
 const counterElement = document.getElementById("counter")!;
+const upgradeCounterElement = document.getElementById("upgrades")!;
 
 document.getElementById("TacoBellButton")?.addEventListener("click", () => {
   counter++;
@@ -30,17 +35,33 @@ document.getElementById("TacoBellButton")?.addEventListener("click", () => {
   }
 });
 
-let prev = performance.now();
+document.getElementById("BajaButton")?.addEventListener("click", () => {
+  if (counter >= 10) {
+    counter -= 10;
+    upgradeCounter++;
+    console.log("Baja Upgrade acquired!");
+    if (upgradeCounterElement) {
+      upgradeCounterElement.textContent = `Baja Blast Upgrades: ${upgradeCounter}`;
+    }
+    if (!running) {
+      running = true;
+      prev = performance.now(); //tracks timestamp(?)
+      requestAnimationFrame(animate);
+    }
+  } else {
+    console.log("Insufficient Taco Funds");
+  }
+});
+
 
 function animate(time: number) {
-  const timeSpent = (time - prev) / 1000; // to find how much time has passed
+  const timePassed = (time - prev) / 1000; // to find how much time has passed
   prev = time;
 
-  counter += timeSpent;
+  counter += timePassed * upgradeCounter;
   const rounded = Math.floor(counter); //no decimals
   counterElement.textContent = `${rounded} taco${rounded !== 1 ? "s" : ""}`; // 1 taco !== 1 tacos
 
   requestAnimationFrame(animate);
 }
 
-requestAnimationFrame(animate); //start
