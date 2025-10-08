@@ -1,6 +1,7 @@
 // import exampleIconUrl from "./noun-paperclip-7598668-00449F.png";
 import "./style.css";
 import tb from "./tb.png";
+import baja from "./bbt.jpg";
 
 // document.body.innerHTML = `
 //   <p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>
@@ -14,6 +15,9 @@ document.body.innerHTML = `
   <button id="TacoBellButton" style="background:none, pointer:none, cursor:none;">
   <img src="${tb}" class="icon" alt="Taco Bell Icon" />
   </button>
+  <button id="BajaButton" style="background:none, pointer:none, cursor:none;">
+  <img src="${baja}" class="icon" alt="Baja Blast Icon" />
+  </button>
 `;
 
 const counterElement = document.getElementById("counter")!;
@@ -22,7 +26,7 @@ document.getElementById("TacoBellButton")?.addEventListener("click", () => {
   counter++;
   console.log("Amount of Taco Bell: ", counter);
   if (counterElement) {
-    counterElement.textContent = `${counter} taco${counter !== 1 ? "s" : ""}`;
+    counterElement.textContent = `${counter} taco${counter !== 1 ? "s" : ""}`; // 1 taco !== 1 tacos
   }
 });
 
