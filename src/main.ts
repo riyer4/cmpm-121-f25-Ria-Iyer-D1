@@ -14,12 +14,13 @@ let running = false; //to track upgrades
 let prev = performance.now();
 
 document.body.innerHTML = `
-  <p>Get me more Taco Bell</p>
-  <p id="counter">${counter} taco</p>
-  <p id="upgrades">Baja Blast Upgrades: ${upgradeCounter}</p>
+  <h1>Get Me More Taco Bell!</h1>
+  <p id="counter">${counter} tacos</p>
   <button id="TacoBellButton" style="background:none, pointer:none, cursor:none;">
   <img src="${tb}" class="icon" alt="Taco Bell Icon" />
   </button>
+  <p id="upgrades">Baja Blast Upgrades: ${upgradeCounter}</p>
+
   <button id="BajaButton" style="background:none, pointer:none, cursor:none;">
   <img src="${baja}" class="icon" alt="Baja Blast Icon" />
   </button>
