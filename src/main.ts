@@ -20,7 +20,7 @@ document.body.innerHTML = `
   <img src="${tb}" class="icon" alt="Taco Bell Icon" />
   </button>
   <h2 id="upgrades">Baja Blast Upgrades: ${upgradeCounter}</h2>
-
+  <h3><-- Click Me!!</h3>
   <button id="BajaButton" style="background:none, pointer:none, cursor:none;">
   <img src="${baja}" class="icon" alt="Baja Blast Icon" />
   </button>
