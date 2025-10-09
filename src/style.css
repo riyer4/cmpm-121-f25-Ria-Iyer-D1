@@ -9,6 +9,13 @@ h1 {
   padding-bottom: 20px;
 }
 
+h2 {
+  font-size: 1rem;
+  position: absolute;
+  top: 20px;
+  right: 40px;
+}
+
 body {
   background-color: #a77bca;
   text-align: center;
