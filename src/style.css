@@ -1,96 +1,84 @@
-.icon {
-  width: 64px;
-  vertical-align: top;
-  border: 1px solid salmon;
-}
-
-h1 {
-  font-size: 3rem;
-  padding-bottom: 20px;
-}
-
-h2 {
-  font-size: 1rem;
-  position: absolute;
-  top: 60px;
-  right: 40px;
-}
-
-h3 {
-  font-size: 2rem;
-  position: absolute;
-  top: 350px;
-  right: 380px;
+/* === Layout base === */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background-color: #a77bca;
   text-align: center;
   font-family: sans-serif;
-  margin: 0;
-  padding-top: 50px;
+  overflow: hidden;
+}
+
+/* === Headers & text === */
+h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
 }
 
 p {
   font-size: 1.5rem;
   margin: 1rem 0;
+  color: #fff;
+  text-shadow: 1px 1px 3px #5c3a7a;
 }
 
+/* === Buttons === */
 button {
-  display: block;
-  margin: 50px auto;
   background: none;
   border: none;
   cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
 
-  padding: 100px;
-  transform: scale(3);
+button:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+/* === Taco Bell main button === */
+#TacoBellButton {
+  margin-top: 20px;
 }
 
 #TacoBellButton .icon {
-  width: 130px;
+  width: 180px;
+  border: 3px solid #fff;
+  border-radius: 12px;
+  box-shadow: 0px 0px 10px #fff;
 }
 
-#TacoBellButton {
+/* === Upgrade panel on right === */
+.upgrade-panel {
   position: absolute;
-  top: 200px;
-  left: 100px;
+  top: 50%;
+  right: 40px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: center;
 }
 
-#BajaButton {
-  position: absolute;
-  top: 10px;
-  right: 0px;
+/* === Upgrade buttons === */
+.upgrade-panel button .icon {
+  width: 60px;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  box-shadow: 0px 0px 6px rgba(255, 255, 255, 0.6);
 }
 
-#BajaButton .icon {
-  width: 40px;
-}
-
-#ChipButton {
-  position: absolute;
-  top: 140px;
-  right: 0px;
-}
-
-#ChipButton .icon {
-  width: 40px;
-}
-#TacoButton {
-  position: absolute;
-  top: 270px;
-  right: 0px;
-}
-
-#TacoButton .icon {
-  width: 40px;
-}
-#GorditaButton {
-  position: absolute;
-  top: 395px;
-  right: 0px;
-}
-
-#GorditaButton .icon {
-  width: 40px;
+/* === Growth rate === */
+#growth {
+  font-size: 1.2rem;
+  margin-top: 20px;
+  color: #fff;
+  text-shadow: 1px 1px 3px #5c3a7a;
 }
