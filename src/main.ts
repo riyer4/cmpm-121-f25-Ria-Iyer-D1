@@ -23,10 +23,10 @@ let prev = performance.now();
 //upgrades:
 
 const upgrades = { //upgrades! A, B, C, & D
-  baja: { count: 0, cost: 10, rate: 0.5 },
-  nacho: { count: 0, cost: 50, rate: 2.0 },
-  taco: { count: 0, cost: 200, rate: 10.0 },
-  gordita: { count: 0, cost: 1000, rate: 20.0 },
+  baja: { count: 0, cost: 10, rate: 0.5, multiplier: 1.15 },
+  nacho: { count: 0, cost: 50, rate: 2.0, multiplier: 1.15 },
+  taco: { count: 0, cost: 200, rate: 10.0, multiplier: 1.15 },
+  gordita: { count: 0, cost: 1000, rate: 20.0, multiplier: 1.15 },
 };
 
 //html:
@@ -79,6 +79,10 @@ const tacoUpgradeCounterElement = document.getElementById("tacoUpgrades")!;
 const gorditaUpgradeCounterElement = document.getElementById(
   "gorditaUpgrades",
 )!;
+const bajaCostElement = document.getElementById("bajaCost")!;
+const nachoCostElement = document.getElementById("nachoCost")!;
+const tacoCostElement = document.getElementById("tacoCost")!;
+const gorditaCostElement = document.getElementById("gorditaCost")!;
 const growthRateElement = document.getElementById("growth")!;
 
 //clicking:
@@ -90,35 +94,44 @@ document.getElementById("TacoBellButton")?.addEventListener("click", () => {
 
 document.getElementById("BajaButton")?.addEventListener(
   "click",
-  () => buyUpgrade("baja", bajaUpgradeCounterElement),
+  () => buyUpgrade("baja", bajaUpgradeCounterElement, bajaCostElement),
 );
 
 document.getElementById("NachoButton")?.addEventListener(
   "click",
-  () => buyUpgrade("nacho", nachoUpgradeCounterElement),
+  () => buyUpgrade("nacho", nachoUpgradeCounterElement, nachoCostElement),
 );
 
 document.getElementById("TacoButton")?.addEventListener(
   "click",
-  () => buyUpgrade("taco", tacoUpgradeCounterElement),
+  () => buyUpgrade("taco", tacoUpgradeCounterElement, tacoCostElement),
 );
 
 document.getElementById("GorditaButton")?.addEventListener(
   "click",
-  () => buyUpgrade("gordita", gorditaUpgradeCounterElement),
+  () => buyUpgrade("gordita", gorditaUpgradeCounterElement, gorditaCostElement),
 );
 
 //upgrade logic:
 
-function buyUpgrade(type: keyof typeof upgrades, element: HTMLElement) {
+function buyUpgrade(
+  type: keyof typeof upgrades,
+  upgradeElement: HTMLElement,
+  costElement: HTMLElement,
+) {
   const upgrade = upgrades[type];
   if (counter >= upgrade.cost) {
     counter -= upgrade.cost;
     upgrade.count++;
 
-    element.textContent = `${
+    // increase cost
+    upgrade.cost = Math.ceil(upgrade.cost * upgrade.multiplier);
+
+    // update
+    upgradeElement.textContent = `${
       capitalize(type)
-    } Upgrades: ${upgrade.count} (Cost: ${upgrade.cost})`;
+    } Upgrades: ${upgrade.count}`;
+    costElement.textContent = `${upgrade.cost} tacos`;
 
     updateCounter();
 
