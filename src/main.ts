@@ -34,7 +34,7 @@ const upgrades = { //upgrades! A, B, C, & D
 document.body.innerHTML = `
   <h1>Get Me More Taco Bell!</h1>
 
-  <p id="counter">${counter} tacos</p>
+  <h3 id="counter">${counter} tacos</h3>
 
   <button id="TacoBellButton">
     <img src="${tb}" class="icon" alt="Taco Bell Icon" />
@@ -42,21 +42,25 @@ document.body.innerHTML = `
 
   <div class="upgrade-panel">
     <div class="upgrade">
+      <h2 id="bajaCost">10 tacos</h2>
       <button id="BajaButton"><img src="${baja}" class="icon" alt="Baja Blast Icon" /></button>
       <p id="bajaUpgrades">Baja Upgrades: 0</p>
     </div>
 
     <div class="upgrade">
+      <h2 id="nachoCost">50 tacos</h2>
       <button id="NachoButton"><img src="${nacho}" class="icon" alt="Chips and Cheese Icon" /></button>
       <p id="nachoUpgrades">Nacho Upgrades: 0</p>
     </div>
 
     <div class="upgrade">
+      <h2 id="tacoCost">200 tacos</h2>
       <button id="TacoButton"><img src="${taco}" class="icon" alt="Doritos Locos Taco Icon" /></button>
       <p id="tacoUpgrades">Taco Upgrades: 0</p>
     </div>
 
     <div class="upgrade">
+      <h2 id="gorditaCost">1000 tacos</h2>
       <button id="GorditaButton"><img src="${gordita}" class="icon" alt="Cheesy Gordita Crunch Icon" /></button>
       <p id="gorditaUpgrades">Gordita Upgrades: 0</p>
     </div>
@@ -156,7 +160,7 @@ function updateCounter() {
   counterElement.textContent = `${rounded} taco${rounded !== 1 ? "s" : ""}`;
 }
 
-// capitilization
+// capitilization since I made everything lowercase and I am lazy
 function capitalize(s: string) {
   return s.charAt(0).toUpperCase() + s.slice(1);
 }

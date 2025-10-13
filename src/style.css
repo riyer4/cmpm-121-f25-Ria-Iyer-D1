@@ -22,8 +22,19 @@ h1 {
   margin-bottom: 10px;
 }
 
+h2 {
+  font-size: 1rem;
+}
+
+h3 {
+  font-size: 2rem;
+  margin: 1rem 0;
+  color: #fff;
+  text-shadow: 1px 1px 3px #5c3a7a;
+}
+
 p {
-  font-size: 1.5rem;
+  font-size: 1rem;
   margin: 1rem 0;
   color: #fff;
   text-shadow: 1px 1px 3px #5c3a7a;
@@ -43,19 +54,17 @@ button:hover {
   filter: brightness(1.2);
 }
 
-/* === Taco Bell main button === */
 #TacoBellButton {
   margin-top: 20px;
 }
 
 #TacoBellButton .icon {
-  width: 180px;
+  width: 300px;
   border: 3px solid #fff;
   border-radius: 12px;
   box-shadow: 0px 0px 10px #fff;
 }
 
-/* === Upgrade panel on right === */
 .upgrade-panel {
   position: absolute;
   top: 50%;
@@ -63,13 +72,13 @@ button:hover {
   transform: translateY(-50%);
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 0px;
   align-items: center;
 }
 
 /* === Upgrade buttons === */
 .upgrade-panel button .icon {
-  width: 60px;
+  width: 70px;
   border: 2px solid #fff;
   border-radius: 8px;
   box-shadow: 0px 0px 6px rgba(255, 255, 255, 0.6);
