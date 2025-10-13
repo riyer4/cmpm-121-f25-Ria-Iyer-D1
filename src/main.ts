@@ -32,13 +32,21 @@ const upgrades = { //upgrades! A, B, C, & D
 //html:
 
 document.body.innerHTML = `
-  <h1>Get Me More Taco Bell!</h1>
+  <div id="inventory" class="inventory">
+    <div id="bajaIcons" class="icon-column"></div>
+    <div id="nachoIcons" class="icon-column"></div>
+    <div id="tacoIcons" class="icon-column"></div>
+    <div id="gorditaIcons" class="icon-column"></div>
+  </div>
 
+  <h1>Get Me More Taco Bell!</h1>
   <h3 id="counter">${counter} tacos</h3>
 
   <button id="TacoBellButton">
     <img src="${tb}" class="icon" alt="Taco Bell Icon" />
   </button>
+
+  <h4>Upgrades:</h4>
 
   <div class="upgrade-panel">
     <div class="upgrade">
@@ -66,7 +74,6 @@ document.body.innerHTML = `
     </div>
   </div>
 
-
   <p id="growth">Taco Multiplier: ${growthRate}</p>
 `;
 
@@ -84,6 +91,13 @@ const nachoCostElement = document.getElementById("nachoCost")!;
 const tacoCostElement = document.getElementById("tacoCost")!;
 const gorditaCostElement = document.getElementById("gorditaCost")!;
 const growthRateElement = document.getElementById("growth")!;
+
+//icons:
+
+const bajaIcons = document.getElementById("bajaIcons")!;
+const nachoIcons = document.getElementById("nachoIcons")!;
+const tacoIcons = document.getElementById("tacoIcons")!;
+const gorditaIcons = document.getElementById("gorditaIcons")!;
 
 //clicking:
 
@@ -133,6 +147,27 @@ function buyUpgrade(
     } Upgrades: ${upgrade.count}`;
     costElement.textContent = `${upgrade.cost} tacos`;
 
+    //get icon
+
+    const img = document.createElement("img");
+    img.src = getUpgradeImage(type);
+    img.className = "icon";
+
+    switch (type) {
+      case "baja":
+        bajaIcons.appendChild(img);
+        break;
+      case "nacho":
+        nachoIcons.appendChild(img);
+        break;
+      case "taco":
+        tacoIcons.appendChild(img);
+        break;
+      case "gordita":
+        gorditaIcons.appendChild(img);
+        break;
+    }
+
     updateCounter();
 
     if (!running) {
@@ -176,4 +211,19 @@ function updateCounter() {
 // capitilization since I made everything lowercase and I am lazy
 function capitalize(s: string) {
   return s.charAt(0).toUpperCase() + s.slice(1);
+}
+
+//for visual farm of icons
+
+function getUpgradeImage(type: keyof typeof upgrades) {
+  switch (type) {
+    case "baja":
+      return baja;
+    case "nacho":
+      return nacho;
+    case "taco":
+      return taco;
+    case "gordita":
+      return gordita;
+  }
 }
