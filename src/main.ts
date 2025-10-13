@@ -2,6 +2,9 @@
 import "./style.css";
 import tb from "./tb.png";
 import baja from "./bbt.jpg";
+import gordita from "./cgc.jpg";
+import taco from "./dlt.jpg";
+import nacho from "./cac.jpg";
 
 // document.body.innerHTML = `
 //   <p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>
@@ -23,6 +26,15 @@ document.body.innerHTML = `
   <h3><-- Click Me!!</h3>
   <button id="BajaButton" style="background:none, pointer:none, cursor:none;">
   <img src="${baja}" class="icon" alt="Baja Blast Icon" />
+  </button>
+  <button id="ChipButton" style="background:none, pointer:none, cursor:none;">
+  <img src="${nacho}" class="icon" alt="Chips and Cheese Icon" />
+  </button>
+  <button id="GorditaButton" style="background:none, pointer:none, cursor:none;">
+  <img src="${gordita}" class="icon" alt="Cheesy Gordita Crunch Icon" />
+  </button>
+  <button id="TacoButton" style="background:none, pointer:none, cursor:none;">
+  <img src="${taco}" class="icon" alt="Doritos Locos Taco Icon" />
   </button>
   <p id="growth">Taco Multiplier: ${growthRate}</p>
 `;

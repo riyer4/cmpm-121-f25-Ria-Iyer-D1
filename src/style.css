@@ -48,7 +48,13 @@ button {
 }
 
 #TacoBellButton .icon {
-  width: 100px;
+  width: 130px;
+}
+
+#TacoBellButton {
+  position: absolute;
+  top: 200px;
+  left: 100px;
 }
 
 #BajaButton {
@@ -58,5 +64,33 @@ button {
 }
 
 #BajaButton .icon {
-  width: 50px;
+  width: 40px;
+}
+
+#ChipButton {
+  position: absolute;
+  top: 140px;
+  right: 0px;
+}
+
+#ChipButton .icon {
+  width: 40px;
+}
+#TacoButton {
+  position: absolute;
+  top: 270px;
+  right: 0px;
+}
+
+#TacoButton .icon {
+  width: 40px;
+}
+#GorditaButton {
+  position: absolute;
+  top: 395px;
+  right: 0px;
+}
+
+#GorditaButton .icon {
+  width: 40px;
 }
