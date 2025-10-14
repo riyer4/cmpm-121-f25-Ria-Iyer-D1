@@ -30,10 +30,20 @@ interface Upgrade {
   multiplier: number;
   count: number;
   icon: string;
+  description: string;
 }
 
 const availableItems: Upgrade[] = [
-  { name: "baja", cost: 10, rate: 0.5, multiplier: 1.15, count: 0, icon: baja },
+  {
+    name: "baja",
+    cost: 10,
+    rate: 0.5,
+    multiplier: 1.15,
+    count: 0,
+    icon: baja,
+    description:
+      "The sweet taste of Baja Blast increases your Taco Bell orders by 0.5 tacos/sec.",
+  },
   {
     name: "nacho",
     cost: 50,
@@ -41,6 +51,8 @@ const availableItems: Upgrade[] = [
     multiplier: 1.15,
     count: 0,
     icon: nacho,
+    description:
+      "The BEST dip EVER, NACHO CHEESE!! The Chips and Nacho Cheese adds 2 tacos/sec to your orders!",
   },
   {
     name: "taco",
@@ -49,6 +61,8 @@ const availableItems: Upgrade[] = [
     multiplier: 1.15,
     count: 0,
     icon: taco,
+    description:
+      "The famous Doritos Nacho Cheese flavor, but as a TACO! The Doritos Locos Taco give you 10 tacos/sec!",
   },
   {
     name: "gordita",
@@ -57,6 +71,8 @@ const availableItems: Upgrade[] = [
     multiplier: 1.15,
     count: 0,
     icon: gordita,
+    description:
+      "A taco...inside of another taco??? You get 20 more tacos per second with a Cheesy Gordita Crunch!",
   },
   {
     name: "wrap",
@@ -65,6 +81,8 @@ const availableItems: Upgrade[] = [
     multiplier: 1.15,
     count: 0,
     icon: wrap,
+    description:
+      "The famous disk of goodness. The crunchwrap supreme will give you 50 tacos per second!",
   },
 ];
 
@@ -92,7 +110,7 @@ document.body.innerHTML = `
     <div id="right-column" class="upgrade-column"></div>
   </div>
 
-
+  <h5>Hover over each upgrade to see what it does!</h5>
   <p id="growth">Taco Multiplier: ${growthRate}</p>
 `;
 
@@ -119,6 +137,7 @@ availableItems.forEach((item, index) => {
 
   const button = document.createElement("button");
   button.id = `${item.name}Button`;
+  button.title = item.description;
   const img = document.createElement("img");
   img.src = item.icon;
   img.className = "icon";
