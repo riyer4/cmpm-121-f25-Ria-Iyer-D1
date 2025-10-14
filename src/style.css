@@ -103,18 +103,19 @@ button:hover {
   top: 280px;
   left: 50px;
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  flex-direction: column; /* stack rows vertically */
+  gap: 12px; /* space between rows */
   z-index: 10;
 }
 
-.icon-column {
+.icon-row {
   display: flex;
   flex-direction: row;
   gap: 4px;
+  flex-wrap: wrap; /* wrap if too many icons */
 }
 
-.icon-column .icon {
+.icon-row .icon {
   width: 32px;
   height: auto;
 }

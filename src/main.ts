@@ -8,6 +8,7 @@ import baja from "./bbt.jpg";
 import gordita from "./cgc.jpg";
 import taco from "./dlt.jpg";
 import nacho from "./cac.jpg";
+// import wrap from "./cs.jpg";
 
 // document.body.innerHTML = `
 //   <p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>
@@ -22,21 +23,52 @@ let prev = performance.now();
 
 //upgrades:
 
-const upgrades = { //upgrades! A, B, C, & D
-  baja: { count: 0, cost: 10, rate: 0.5, multiplier: 1.15 },
-  nacho: { count: 0, cost: 50, rate: 2.0, multiplier: 1.15 },
-  taco: { count: 0, cost: 200, rate: 10.0, multiplier: 1.15 },
-  gordita: { count: 0, cost: 1000, rate: 20.0, multiplier: 1.15 },
-};
+interface Upgrade {
+  name: string;
+  cost: number;
+  rate: number;
+  multiplier: number;
+  count: number;
+  icon: string;
+}
+
+const availableItems: Upgrade[] = [
+  { name: "baja", cost: 10, rate: 0.5, multiplier: 1.15, count: 0, icon: baja },
+  {
+    name: "nacho",
+    cost: 50,
+    rate: 2.0,
+    multiplier: 1.15,
+    count: 0,
+    icon: nacho,
+  },
+  {
+    name: "taco",
+    cost: 200,
+    rate: 10.0,
+    multiplier: 1.15,
+    count: 0,
+    icon: taco,
+  },
+  {
+    name: "gordita",
+    cost: 1000,
+    rate: 20.0,
+    multiplier: 1.15,
+    count: 0,
+    icon: gordita,
+  },
+];
 
 //html:
 
 document.body.innerHTML = `
+  <h4>Upgrades:</h4>
   <div id="inventory" class="inventory">
-    <div id="bajaIcons" class="icon-column"></div>
-    <div id="nachoIcons" class="icon-column"></div>
-    <div id="tacoIcons" class="icon-column"></div>
-    <div id="gorditaIcons" class="icon-column"></div>
+    <div id="bajaIcons" class="icon-row"></div>
+    <div id="nachoIcons" class="icon-row"></div>
+    <div id="tacoIcons" class="icon-row"></div>
+    <div id="gorditaIcons" class="icon-row"></div>
   </div>
 
   <h1>Get Me More Taco Bell!</h1>
@@ -46,125 +78,85 @@ document.body.innerHTML = `
     <img src="${tb}" class="icon" alt="Taco Bell Icon" />
   </button>
 
-  <h4>Upgrades:</h4>
-
-  <div class="upgrade-panel">
-    <div class="upgrade">
-      <h2 id="bajaCost">10 tacos</h2>
-      <button id="BajaButton"><img src="${baja}" class="icon" alt="Baja Blast Icon" /></button>
-      <p id="bajaUpgrades">Baja Upgrades: 0</p>
-    </div>
-
-    <div class="upgrade">
-      <h2 id="nachoCost">50 tacos</h2>
-      <button id="NachoButton"><img src="${nacho}" class="icon" alt="Chips and Cheese Icon" /></button>
-      <p id="nachoUpgrades">Nacho Upgrades: 0</p>
-    </div>
-
-    <div class="upgrade">
-      <h2 id="tacoCost">200 tacos</h2>
-      <button id="TacoButton"><img src="${taco}" class="icon" alt="Doritos Locos Taco Icon" /></button>
-      <p id="tacoUpgrades">Taco Upgrades: 0</p>
-    </div>
-
-    <div class="upgrade">
-      <h2 id="gorditaCost">1000 tacos</h2>
-      <button id="GorditaButton"><img src="${gordita}" class="icon" alt="Cheesy Gordita Crunch Icon" /></button>
-      <p id="gorditaUpgrades">Gordita Upgrades: 0</p>
-    </div>
-  </div>
-
+  <div class="upgrade-panel"></div>
   <p id="growth">Taco Multiplier: ${growthRate}</p>
 `;
 
 //counters:
 
 const counterElement = document.getElementById("counter")!;
-const bajaUpgradeCounterElement = document.getElementById("bajaUpgrades")!;
-const nachoUpgradeCounterElement = document.getElementById("nachoUpgrades")!;
-const tacoUpgradeCounterElement = document.getElementById("tacoUpgrades")!;
-const gorditaUpgradeCounterElement = document.getElementById(
-  "gorditaUpgrades",
-)!;
-const bajaCostElement = document.getElementById("bajaCost")!;
-const nachoCostElement = document.getElementById("nachoCost")!;
-const tacoCostElement = document.getElementById("tacoCost")!;
-const gorditaCostElement = document.getElementById("gorditaCost")!;
 const growthRateElement = document.getElementById("growth")!;
-
-//icons:
-
-const bajaIcons = document.getElementById("bajaIcons")!;
-const nachoIcons = document.getElementById("nachoIcons")!;
-const tacoIcons = document.getElementById("tacoIcons")!;
-const gorditaIcons = document.getElementById("gorditaIcons")!;
+const upgradePanel = document.querySelector(".upgrade-panel")!;
 
 //clicking:
+
+availableItems.forEach((item) => {
+  const upgradeDiv = document.createElement("div");
+  upgradeDiv.className = "upgrade";
+
+  const costElement = document.createElement("h2");
+  costElement.id = `${item.name}Cost`;
+  costElement.textContent = `${item.cost} tacos`;
+
+  const button = document.createElement("button");
+  button.id = `${item.name}Button`;
+  const img = document.createElement("img");
+  img.src = item.icon;
+  img.className = "icon";
+  button.appendChild(img);
+
+  const countElement = document.createElement("p");
+  countElement.id = `${item.name}Upgrades`;
+  countElement.textContent = `${capitalize(item.name)} Upgrades: ${item.count}`;
+
+  upgradeDiv.append(costElement, button, countElement);
+  upgradePanel.appendChild(upgradeDiv);
+
+  button.addEventListener(
+    "click",
+    () => buyUpgrade(item, costElement, countElement),
+  );
+});
 
 document.getElementById("TacoBellButton")?.addEventListener("click", () => {
   counter++;
   updateCounter();
 });
 
-document.getElementById("BajaButton")?.addEventListener(
-  "click",
-  () => buyUpgrade("baja", bajaUpgradeCounterElement, bajaCostElement),
-);
-
-document.getElementById("NachoButton")?.addEventListener(
-  "click",
-  () => buyUpgrade("nacho", nachoUpgradeCounterElement, nachoCostElement),
-);
-
-document.getElementById("TacoButton")?.addEventListener(
-  "click",
-  () => buyUpgrade("taco", tacoUpgradeCounterElement, tacoCostElement),
-);
-
-document.getElementById("GorditaButton")?.addEventListener(
-  "click",
-  () => buyUpgrade("gordita", gorditaUpgradeCounterElement, gorditaCostElement),
-);
-
 //upgrade logic:
 
 function buyUpgrade(
-  type: keyof typeof upgrades,
-  upgradeElement: HTMLElement,
+  item: Upgrade,
   costElement: HTMLElement,
+  countElement: HTMLElement,
 ) {
-  const upgrade = upgrades[type];
-  if (counter >= upgrade.cost) {
-    counter -= upgrade.cost;
-    upgrade.count++;
+  if (counter >= item.cost) {
+    counter -= item.cost;
+    item.count++;
 
-    // increase cost
-    upgrade.cost = Math.ceil(upgrade.cost * upgrade.multiplier);
+    item.cost = Math.ceil(item.cost * item.multiplier);
+    costElement.textContent = `${item.cost} tacos`;
+    countElement.textContent = `${
+      capitalize(item.name)
+    } Upgrades: ${item.count}`;
 
-    // update
-    upgradeElement.textContent = `${
-      capitalize(type)
-    } Upgrades: ${upgrade.count}`;
-    costElement.textContent = `${upgrade.cost} tacos`;
-
-    //get icon
-
+    // Append icon to the correct row
     const img = document.createElement("img");
-    img.src = getUpgradeImage(type);
+    img.src = item.icon;
     img.className = "icon";
 
-    switch (type) {
+    switch (item.name) {
       case "baja":
-        bajaIcons.appendChild(img);
+        document.getElementById("bajaIcons")?.appendChild(img);
         break;
       case "nacho":
-        nachoIcons.appendChild(img);
+        document.getElementById("nachoIcons")?.appendChild(img);
         break;
       case "taco":
-        tacoIcons.appendChild(img);
+        document.getElementById("tacoIcons")?.appendChild(img);
         break;
       case "gordita":
-        gorditaIcons.appendChild(img);
+        document.getElementById("gorditaIcons")?.appendChild(img);
         break;
     }
 
@@ -185,18 +177,17 @@ function animate(time: number) {
   const timePassed = (time - prev) / 1000;
   prev = time;
 
+  // calculate growth rate
   growthRate = 0;
-  for (const key in upgrades) {
-    growthRate += upgrades[key as keyof typeof upgrades].count *
-      upgrades[key as keyof typeof upgrades].rate;
-  }
+  availableItems.forEach((item) => {
+    growthRate += item.count * item.rate;
+  });
 
   growthRateElement.textContent = `Taco Rate: ${
     growthRate.toFixed(1)
   } tacos/sec`;
 
   counter += growthRate * timePassed;
-
   updateCounter();
 
   requestAnimationFrame(animate);
@@ -211,19 +202,4 @@ function updateCounter() {
 // capitilization since I made everything lowercase and I am lazy
 function capitalize(s: string) {
   return s.charAt(0).toUpperCase() + s.slice(1);
-}
-
-//for visual farm of icons
-
-function getUpgradeImage(type: keyof typeof upgrades) {
-  switch (type) {
-    case "baja":
-      return baja;
-    case "nacho":
-      return nacho;
-    case "taco":
-      return taco;
-    case "gordita":
-      return gordita;
-  }
 }
