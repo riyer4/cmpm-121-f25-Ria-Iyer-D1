@@ -48,7 +48,6 @@ p {
   text-shadow: 1px 1px 3px #5c3a7a;
 }
 
-/* === Buttons === */
 button {
   background: none;
   border: none;
@@ -79,9 +78,23 @@ button:hover {
   right: 40px;
   transform: translateY(-50%);
   display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.upgrade-column {
+  display: flex;
   flex-direction: column;
-  gap: 0px;
+  gap: 10px;
   align-items: center;
+}
+
+#right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  transform: translateY(60px);
 }
 
 .upgrade-panel button .icon {
@@ -103,8 +116,8 @@ button:hover {
   top: 280px;
   left: 50px;
   display: flex;
-  flex-direction: column; /* stack rows vertically */
-  gap: 12px; /* space between rows */
+  flex-direction: column;
+  gap: 12px;
   z-index: 10;
 }
 
@@ -112,10 +125,10 @@ button:hover {
   display: flex;
   flex-direction: row;
   gap: 4px;
-  flex-wrap: wrap; /* wrap if too many icons */
+  flex-wrap: wrap;
 }
 
 .icon-row .icon {
-  width: 32px;
+  width: 50px;
   height: auto;
 }

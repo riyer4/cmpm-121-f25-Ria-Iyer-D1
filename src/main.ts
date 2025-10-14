@@ -8,7 +8,7 @@ import baja from "./bbt.jpg";
 import gordita from "./cgc.jpg";
 import taco from "./dlt.jpg";
 import nacho from "./cac.jpg";
-// import wrap from "./cs.jpg";
+import wrap from "./cs.jpg";
 
 // document.body.innerHTML = `
 //   <p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>
@@ -58,17 +58,25 @@ const availableItems: Upgrade[] = [
     count: 0,
     icon: gordita,
   },
+  {
+    name: "wrap",
+    cost: 2000,
+    rate: 50.0,
+    multiplier: 1.15,
+    count: 0,
+    icon: wrap,
+  },
 ];
 
 //html:
 
 document.body.innerHTML = `
-  <h4>Upgrades:</h4>
   <div id="inventory" class="inventory">
     <div id="bajaIcons" class="icon-row"></div>
     <div id="nachoIcons" class="icon-row"></div>
     <div id="tacoIcons" class="icon-row"></div>
     <div id="gorditaIcons" class="icon-row"></div>
+    <div id="wrapIcons" class="icon-row"></div>
   </div>
 
   <h1>Get Me More Taco Bell!</h1>
@@ -78,7 +86,13 @@ document.body.innerHTML = `
     <img src="${tb}" class="icon" alt="Taco Bell Icon" />
   </button>
 
-  <div class="upgrade-panel"></div>
+  <h4>Upgrades:</h4>
+  <div class="upgrade-panel">
+    <div id="left-column" class="upgrade-column"></div>
+    <div id="right-column" class="upgrade-column"></div>
+  </div>
+
+
   <p id="growth">Taco Multiplier: ${growthRate}</p>
 `;
 
@@ -86,11 +100,16 @@ document.body.innerHTML = `
 
 const counterElement = document.getElementById("counter")!;
 const growthRateElement = document.getElementById("growth")!;
-const upgradePanel = document.querySelector(".upgrade-panel")!;
+//const upgradePanel = document.querySelector(".upgrade-panel")!;
 
 //clicking:
 
-availableItems.forEach((item) => {
+const leftColumn = document.getElementById("left-column")!;
+const rightColumn = document.getElementById("right-column")!;
+
+availableItems.forEach((item, index) => {
+  const targetColumn = index < 3 ? leftColumn : rightColumn;
+
   const upgradeDiv = document.createElement("div");
   upgradeDiv.className = "upgrade";
 
@@ -110,7 +129,7 @@ availableItems.forEach((item) => {
   countElement.textContent = `${capitalize(item.name)} Upgrades: ${item.count}`;
 
   upgradeDiv.append(costElement, button, countElement);
-  upgradePanel.appendChild(upgradeDiv);
+  targetColumn.appendChild(upgradeDiv);
 
   button.addEventListener(
     "click",
@@ -157,6 +176,9 @@ function buyUpgrade(
         break;
       case "gordita":
         document.getElementById("gorditaIcons")?.appendChild(img);
+        break;
+      case "wrap":
+        document.getElementById("wrapIcons")?.appendChild(img);
         break;
     }
 
