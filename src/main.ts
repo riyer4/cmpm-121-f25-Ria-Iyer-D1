@@ -200,8 +200,6 @@ function buyUpgrade(
       prev = performance.now();
       requestAnimationFrame(animate);
     }
-  } else {
-    console.log("Insufficient Taco Funds");
   }
 }
 
