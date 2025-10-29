@@ -1,8 +1,6 @@
-// import exampleIconUrl from "./noun-paperclip-7598668-00449F.png";
+// == IMPORTS == //
+
 import "./style.css";
-
-//buttons:
-
 import tb from "./tb.png";
 import baja from "./bbt.jpg";
 import gordita from "./cgc.jpg";
@@ -10,18 +8,14 @@ import taco from "./dlt.jpg";
 import nacho from "./cac.jpg";
 import wrap from "./cs.jpg";
 
-// document.body.innerHTML = `
-//   <p>Example image asset: <img src="${exampleIconUrl}" class="icon" /></p>
-// `;
-
-//variables:
+// == VARIABLES == //
 
 let counter = 0;
 let growthRate = 0;
 let running = false; //to track upgrades
 let prev = performance.now();
 
-//upgrades:
+// == UPGRADE SETUP == //
 
 interface Upgrade {
   name: string;
@@ -86,7 +80,7 @@ const availableItems: Upgrade[] = [
   },
 ];
 
-//html:
+// == HTML == //
 
 document.body.innerHTML = `
   <div id="inventory" class="inventory">
@@ -114,13 +108,12 @@ document.body.innerHTML = `
   <p id="growth">Taco Multiplier: ${growthRate}</p>
 `;
 
-//counters:
+// == COUNTERS == //
 
 const counterElement = document.getElementById("counter")!;
 const growthRateElement = document.getElementById("growth")!;
-//const upgradePanel = document.querySelector(".upgrade-panel")!;
 
-//clicking:
+// == EVENT LISTENERS == //
 
 const leftColumn = document.getElementById("left-column")!;
 const rightColumn = document.getElementById("right-column")!;
@@ -161,7 +154,7 @@ document.getElementById("TacoBellButton")?.addEventListener("click", () => {
   updateCounter();
 });
 
-//upgrade logic:
+// == UPGRADE LOGIC == //
 
 function buyUpgrade(
   item: Upgrade,
@@ -178,7 +171,6 @@ function buyUpgrade(
       capitalize(item.name)
     } Upgrades: ${item.count}`;
 
-    // Append icon to the correct row
     const img = document.createElement("img");
     img.src = item.icon;
     img.className = "icon";
@@ -213,12 +205,12 @@ function buyUpgrade(
   }
 }
 
-// growth
+// == GROWTH == //
+
 function animate(time: number) {
   const timePassed = (time - prev) / 1000;
   prev = time;
 
-  // calculate growth rate
   growthRate = 0;
   availableItems.forEach((item) => {
     growthRate += item.count * item.rate;
@@ -234,13 +226,12 @@ function animate(time: number) {
   requestAnimationFrame(animate);
 }
 
-// update counter
+// == UPDATE COUNTER == //
 function updateCounter() {
   const rounded = Math.floor(counter);
   counterElement.textContent = `${rounded} taco${rounded !== 1 ? "s" : ""}`;
 }
 
-// capitilization since I made everything lowercase and I am lazy
 function capitalize(s: string) {
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
