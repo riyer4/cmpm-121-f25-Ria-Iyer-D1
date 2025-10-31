@@ -1,12 +1,12 @@
 // == IMPORTS == //
 
+import baja from "./bbt.jpg";
+import nacho from "./cac.jpg";
+import gordita from "./cgc.jpg";
+import wrap from "./cs.jpg";
+import taco from "./dlt.jpg";
 import "./style.css";
 import tb from "./tb.png";
-import baja from "./bbt.jpg";
-import gordita from "./cgc.jpg";
-import taco from "./dlt.jpg";
-import nacho from "./cac.jpg";
-import wrap from "./cs.jpg";
 
 // == VARIABLES == //
 
@@ -105,7 +105,7 @@ document.body.innerHTML = `
   </div>
 
   <h5>Hover over each upgrade to see what it does!</h5>
-  <p id="growth">Taco Multiplier: ${growthRate}</p>
+  <h6 id="growth">Taco Multiplier: ${growthRate}</h6>
 `;
 
 // == COUNTERS == //
